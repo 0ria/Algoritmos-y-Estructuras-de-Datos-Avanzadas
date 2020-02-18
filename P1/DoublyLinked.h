@@ -130,8 +130,13 @@ void DoublyLinked<T>::insertAfter(Node<T>* prevNode, T newData) {
 template <typename T>
 std::ostream& DoublyLinked<T>::write(std::ostream& os) {
   Node<T>* newNode = head;  
+  std::cout << "[ ";
   while (newNode != NULL) {
     newNode -> write(os);
     newNode = newNode->getNext();
+    if (newNode != NULL) {
+      std::cout << ", ";
+    }
   }
+  std::cout << "]" << std::endl;
 }

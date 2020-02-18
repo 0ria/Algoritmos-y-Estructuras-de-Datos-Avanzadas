@@ -22,6 +22,7 @@ public:
   T get(int);
   T getBack(void);
   void write(void);
+  std::ostream& write(std::ostream&);
   T& operator[](int);
   Vector<T>& operator=(Vector<T>&);
 
@@ -127,6 +128,17 @@ void Vector<T>::write() {
     std::cout << ptr[i] << " ";
   }
   std::cout << std::endl;
+}
+
+template <typename T>
+std::ostream& Vector<T>::write(std::ostream& os) {
+  std::cout << "{ ";
+  for(int i = 0; i < current; i++) {
+    os << ptr[i];
+    if (i + 1 < current)
+      std::cout << ", ";
+  }
+  std::cout << "}" << std::endl;
 }
 
 template <typename T>

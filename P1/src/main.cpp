@@ -1,7 +1,7 @@
-#include "Vector.h"
-#include "DoublyLinked.h"
-#include "StackV.h"
-#include "Queue.h"
+#include "../include/Vector.h"
+#include "../include/DoublyLinked.h"
+#include "../include/StackV.h"
+#include "../include/Queue.h"
 #include <string>
 
 int main (void) {

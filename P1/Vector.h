@@ -23,10 +23,10 @@ public:
   T get(int);
   T getBack(void);
   void write(void);
-  std::ostream& write(std::ostream&);
+  std::ostream& write(std::ostream&) const;
   T& operator[](int);
   Vector<T>& operator=(Vector<T>&);
-
+  inline friend std::ostream& operator<<(std::ostream& os, Vector<T> const& v) { v.write(os); return os; };
 };
 
 
@@ -132,14 +132,14 @@ void Vector<T>::write() {
 }
 
 template <typename T>
-std::ostream& Vector<T>::write(std::ostream& os) {
-  std::cout << "Vector: {";
+std::ostream& Vector<T>::write(std::ostream& os) const{
+  os << "Vector: {";
   for(int i = 0; i < current; i++) {
       os << ptr[i];
     if (i + 1 < current)
-      std::cout << ", ";
+      os << ", ";
   }
-  std::cout << "}" << std::endl;
+  os << "}" << std::endl;
   return os;
 }
 

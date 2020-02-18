@@ -24,7 +24,6 @@ public:
   void write(void);
   T& operator[](int);
   Vector<T>& operator=(Vector<T>&);
-  std::ostream& operator<<(const Vector<T>&, std::ostream&);
 
 };
 
@@ -74,7 +73,6 @@ void Vector<T>::pushBack(T element) {
     delete[] ptr;
     sz *= 2;
     ptr = temp;
-    delete[] temp;
   }
   ptr[current] = element;
   current++;
@@ -148,12 +146,6 @@ template <typename T>
     this -> sz = v.sz;
     this -> current = v.current;
     return *this;
-}
-
-template <typename T>
-std::ostream& operator<<(const Vector<T>& v, std::ostream& os) {
-  v.write(os);
-  return os;
 }
 
 

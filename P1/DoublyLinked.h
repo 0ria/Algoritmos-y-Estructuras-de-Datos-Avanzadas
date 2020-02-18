@@ -1,23 +1,32 @@
-#include "Node.hpp"
+#include "Node.h"
+#include <cassert>
 
 template <typename T>
 class DoublyLinked {
 private:
-  Node<T> nodo;
+  int sz;;
+  Node<T>* head;
+  Node<T>* tail;
 public:
   DoublyLinked(/* args */);
   ~DoublyLinked();
-  void insertFront(Node<T>* head, T newData);
-  void insertAfter(Node<T>* prevNode, T newData);
-  void insertEnd(Node<T>* tail, T newData);
-  void deleteFront();
-  void deleteLast();
+  void insertHead(Node<T>*);
+  void insertAfter(Node<T>*, T newData);
+  void insertTail(Node<T>*);
+  Node<T>* extractHead(void);
+  Node<T>* extractTail(void);
   void deleteAfter(Node<T>* prevNode);
-  void displayList(Node<T>* node);
+  Node<T>* getHead(void);
+  Node<T>* getTail(void);
+  std::ostream& write(std::ostream&);
+  bool empty(void);
 };
 
 template <typename T>
-DoublyLinked<T>::DoublyLinked(/* args */) {
+DoublyLinked<T>::DoublyLinked() :
+head(NULL),
+tail(NULL),
+sz(0) {
   
 }
 
@@ -26,36 +35,87 @@ DoublyLinked<T>::~DoublyLinked() {
 
 }
 
-template <typename T>
-void DoublyLinked<T>::insertFront(Node<T>* head, T newData) {
-  Node<T>* newNode = new Node<T>;
-
-  newNode -> data = newData;
-  newNode -> next = (*head);
-  newNode -> prev = NULL;
-
-  if ((*head) != NULL)
-    (*head) -> prev = newNode;
-
-  (*head) = newNode;
+template <class T>
+bool DoublyLinked<T>::empty(void) {
+  if (head == NULL) {
+    assert(tail == NULL);
+	  assert(sz == 0);
+	  return true;
+	} 
+  else return false;
 }
 
 template <typename T>
-void DoublyLinked<T>::insertEnd(Node<T>* head, T newData) {
-  Node<T>* newNode = new Node<T>;
-  Node<T>* last = *head;
+void DoublyLinked<T>::insertHead(Node<T>* nodo) {
+  if (empty()) {
+    head = nodo;
+    tail = head;
+  }
+  else {
+    head -> setPrev(nodo);
+    nodo -> setNext(head);
+    head = nodo;
+  }
+  sz++;
+}
 
-  newNode -> data = newData;
-  newNode -> next = NULL;
-  newNode -> prev = (*head);
-
-  if ((*head) == NULL) {
-    newNode -> prev = NULL;
-    *head = newNode;
-    return ;
+template <typename T>
+void DoublyLinked<T>::insertTail(Node<T>* nodo) {
+  if (empty()) {
+    head = nodo;
+    tail = head;
+  }
+  else {
+    tail -> setNext(nodo);
+    nodo -> setPrev(tail);
+    tail = nodo;
   }
 }
 
+template <typename T>
+Node<T>* DoublyLinked<T>::extractTail(void) {
+  Node<T>* newNode = tail;
+  tail = tail -> getPrev();
+
+  if (tail != NULL)
+    tail -> setNext(NULL);
+  else
+    head = NULL;
+
+  sz--;
+
+  newNode -> setNext(NULL);
+  newNode -> setPrev(NULL);
+  return newNode;
+}
+
+template <typename T>
+Node<T>* DoublyLinked<T>::extractHead(void) {
+  Node<T>* newNode = head;
+  head = head -> getNext();
+
+  if (head)
+    head -> setPrev(NULL);
+  else
+    tail = NULL;
+
+  sz--;
+
+  newNode -> setNext(NULL);
+  newNode -> setPrev(NULL);
+  return newNode; 
+}
+
+template <typename T>
+Node<T>* DoublyLinked<T>::getHead(void) {
+  return head;
+}
+
+template <typename T>
+Node<T>* DoublyLinked<T>::getTail(void) {
+  return tail;
+}
+/*
 template <typename T>
 void DoublyLinked<T>::insertAfter(Node<T>* prevNode, T newData) {
   Node<T>* newNode = new Node<T>;
@@ -65,4 +125,13 @@ void DoublyLinked<T>::insertAfter(Node<T>* prevNode, T newData) {
   newNode -> prev = prevNode;
 
   prevNode -> next = newNode;
+}
+*/
+template <typename T>
+std::ostream& DoublyLinked<T>::write(std::ostream& os) {
+  Node<T>* newNode = head;  
+  while (newNode != NULL) {
+    newNode -> write(os);
+    newNode = newNode->getNext();
+  }
 }

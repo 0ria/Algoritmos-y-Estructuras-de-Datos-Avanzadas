@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdio>
 #include <iostream>
 
@@ -132,13 +133,14 @@ void Vector<T>::write() {
 
 template <typename T>
 std::ostream& Vector<T>::write(std::ostream& os) {
-  std::cout << "{ ";
+  std::cout << "Vector: {";
   for(int i = 0; i < current; i++) {
-    os << ptr[i];
+      os << ptr[i];
     if (i + 1 < current)
       std::cout << ", ";
   }
   std::cout << "}" << std::endl;
+  return os;
 }
 
 template <typename T>
@@ -159,6 +161,7 @@ template <typename T>
     this -> current = v.current;
     return *this;
 }
+
 
 
 

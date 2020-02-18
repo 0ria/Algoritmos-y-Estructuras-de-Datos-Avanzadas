@@ -1,10 +1,11 @@
+#pragma once
 #include "Node.h"
 #include <cassert>
 
 template <typename T>
 class DoublyLinked {
 private:
-  int sz;;
+  int sz;
   Node<T>* head;
   Node<T>* tail;
 public:
@@ -20,6 +21,7 @@ public:
   Node<T>* getTail(void);
   std::ostream& write(std::ostream&);
   bool empty(void);
+  int getSize(void);
 };
 
 template <typename T>
@@ -115,6 +117,26 @@ template <typename T>
 Node<T>* DoublyLinked<T>::getTail(void) {
   return tail;
 }
+
+template <typename T>
+std::ostream& DoublyLinked<T>::write(std::ostream& os) {
+  Node<T>* newNode = head;  
+  std::cout << "Dll: [";
+  while (newNode != NULL) {
+    newNode -> write(os);
+    newNode = newNode->getNext();
+    if (newNode != NULL) {
+      std::cout << ", ";
+    }
+  }
+  std::cout << "]" << std::endl;
+}
+
+template <typename T>
+int DoublyLinked<T>::getSize(void) {
+  return sz;
+}
+
 /*
 template <typename T>
 void DoublyLinked<T>::insertAfter(Node<T>* prevNode, T newData) {
@@ -127,16 +149,3 @@ void DoublyLinked<T>::insertAfter(Node<T>* prevNode, T newData) {
   prevNode -> next = newNode;
 }
 */
-template <typename T>
-std::ostream& DoublyLinked<T>::write(std::ostream& os) {
-  Node<T>* newNode = head;  
-  std::cout << "[ ";
-  while (newNode != NULL) {
-    newNode -> write(os);
-    newNode = newNode->getNext();
-    if (newNode != NULL) {
-      std::cout << ", ";
-    }
-  }
-  std::cout << "]" << std::endl;
-}

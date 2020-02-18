@@ -1,10 +1,12 @@
-#include "DoublyLinked.h"
+#pragma once
+#include "Vector.h"
 
 template <typename T>
 class Stack : public DoublyLinked{
   private:
-  /* data */
+    std::Vector<T> stack;
   public:
-    Stack(/* args */);
+    Stack();
     ~Stack();
+
 };

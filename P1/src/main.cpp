@@ -16,10 +16,10 @@ int main (void) {
   v_.pushBack(10);
   v_.write(std::cout);
 
-  l_.insertHead(new Node<int>(5));
+  Node<int>* a = new Node<int>(9);
   l_.insertHead(new Node<int>(6));
+  l_.insertHead(a);
   l_.insertHead(new Node<int>(20));
-  l_.extractTail();
   l_.write(std::cout);
 
   p_.push(10);

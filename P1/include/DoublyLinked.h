@@ -12,7 +12,7 @@ public:
   DoublyLinked(/* args */);
   ~DoublyLinked();
   void insertHead(Node<T>*);
-  void insertAfter(Node<T>*, T newData);
+  void insertAfter(Node<T>*, int);
   void insertTail(Node<T>*);
   Node<T>* extractHead(void);
   Node<T>* extractTail(void);
@@ -72,6 +72,21 @@ void DoublyLinked<T>::insertTail(Node<T>* nodo) {
     nodo -> setPrev(tail);
     tail = nodo;
   }
+  sz++;
+}
+
+template <typename T>
+void DoublyLinked<T>::insertAfter(Node<T>* prevNode, int data) {
+  Node<T>* newNode;
+  newNode -> setData(data);
+  newNode -> setNext(prevNode -> getNext());
+  prevNode -> setNext(newNode);
+  newNode -> setPrev(prevNode);
+
+  if (newNode -> getNext() != NULL) {
+    newNode -> getNext() -> setPrev(newNode);
+  }
+  sz++;
 }
 
 template <typename T>

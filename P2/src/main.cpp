@@ -1,4 +1,7 @@
 #include "../include/Board.h"
+#include <chrono>
+#include <thread>
+#include <stdlib.h>
 
 int main (void) {
   int filas;
@@ -39,16 +42,18 @@ int main (void) {
 
   tablero.actualizar(vectorCelulasVivas);
 
-  /* Muestra por pantalla el estado de la malla del tablero */
+  /* Muestra por pantalla el estado de la malla del tablero 
   std::cout << "La malla antes de empezar" << std::endl;
-  tablero.write(std::cout);
+  tablero.write(std::cout); */
 
   /* Ejecuta un bucle donde cada iteración se corresponde a un turno en la 
       evolución de juego. En cada turno se actualiza y se muestra por pantalla
       el estado de la malla del tablero */
   for (int i = 0; i < turnos; i++) {
-    std::cout << "La malla en el turno " << i << std::endl;
     tablero.actualizar();
+    system("clear");
+    std::cout << "La malla en el turno " << i + 1 << std::endl;
     tablero.write(std::cout);
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
   }
 }

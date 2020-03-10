@@ -53,10 +53,6 @@ void Board::write(std::ostream& os) {
     os << std::endl;
   }
 }
-/*
-Cell* Board::operator[](int pos) {
-  return mallaCelulas[pos];
-}*/
 
 std::vector<std::vector<Cell*> > Board::getMalla(void) const{
   return mallaCelulas;

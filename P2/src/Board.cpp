@@ -48,8 +48,9 @@ void Board::write(std::ostream& os) {
     os << "|";
     for (int j = 2; j < columnas + 2; j++) {
       mallaCelulas[i][j] -> write(os);
+      os << "|";
     }
-    os << "|" << std::endl;
+    os << std::endl;
   }
 }
 /*

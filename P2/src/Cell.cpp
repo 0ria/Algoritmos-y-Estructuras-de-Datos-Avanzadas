@@ -41,18 +41,15 @@ void Cell::actualizarEstado(void) {
   if (vecinas == 3 && getEstado() == 0) {
     setEstado(1);
   }
-  if ((vecinas != 2 || vecinas != 3) && getEstado() == 1) {
+  else if ((vecinas == 2 || vecinas == 3) && getEstado() == 1) {
+    setEstado(1);
+  }
+  else {
     setEstado(0);
   }
 }
 
 int Cell::contarVecinas(const Board& malla) {
-  /*if (sumTotal(malla) == 3 && getEstado() == 0) {
-    setEstado(1);
-  }
-  if ((sumTotal(malla) != 2 || sumTotal(malla) != 3) && getEstado() == 1) {
-    setEstado(0);
-  }*/
   vecinas = sumTotal(malla);
 }
 

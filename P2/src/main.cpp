@@ -34,7 +34,7 @@ int main (void) {
     std::cin >> coordX;
     std::cout << "Coordenada j: ";
     std::cin >> coordY;
-    vectorCelulasVivas.push_back(std::make_pair(coordX, coordY));
+    vectorCelulasVivas.push_back(std::make_pair(coordX + 2, coordY + 2));
   }
 
   tablero.actualizar(vectorCelulasVivas);
